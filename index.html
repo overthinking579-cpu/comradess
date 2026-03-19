@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Queen 👑</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Sections */
+.section {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: 1s;
+}
+.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Backgrounds */
+#home {
+  background: linear-gradient(135deg, #ff9a9e, #fecfef);
+}
+.question {
+  background: black;
+}
+
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 12px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Input */
+input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+}
+
+/* Photo */
+img {
+  width: 200px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
+}
+
+/* Signature */
+.signature {
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+.blue-heart {
+  color: #bdefff;
+  text-shadow: 
+    0 0 5px #bdefff,
+    0 0 10px #87cefa,
+    0 0 20px #00bfff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💖 HOME -->
+<div id="home" class="section active">
+  <img src="photo.jpg">
+  <h1>👑 Hello, My Dear Queen 👑</h1>
+  <p>I have something special for you… 💖</p>
+  <button onclick="show('q1')">Enter</button>
+</div>
+
+<!-- ❓ Q1 -->
+<div id="q1" class="section question">
+  <h2>When did we first meet? 🥺</h2>
+
+  <div id="input1">
+    <input id="ans1" placeholder="Enter date">
+    <br><br>
+    <button onclick="checkQ1()">Submit</button>
+  </div>
+
+  <div id="options1" style="display:none;">
+    <p>Dear, choose the correct date 😏</p>
+    <button onclick="optQ1(false)">8/7/2025</button>
+    <button onclick="optQ1(true)">9/7/2025</button>
+    <button onclick="optQ1(false)">10/7/2025</button>
+    <button onclick="optQ1(false)">9/8/2025</button>
+  </div>
+
+  <p id="res1"></p>
+</div>
+
+<!-- ❓ Q2 -->
+<div id="q2" class="section question">
+  <h2>Who fell first? 💖</h2>
+  <button onclick="nextQ2('Hmm… maybe 😏 but I fell harder ❤️')">You 😌</button>
+  <button onclick="nextQ2('Yes 😎 and I’d do it again for you 💖')">Me 😎</button>
+  <button onclick="nextQ2('That’s why we’re perfect together 👑')">Both ❤️</button>
+  <p id="res2"></p>
+</div>
+
+<!-- ❓ Q3 -->
+<div id="q3" class="section question">
+  <h2>When did I propose to you? 💍</h2>
+  <input id="ans3" placeholder="Enter date">
+  <br><br>
+  <button onclick="checkQ3()">Submit</button>
+  <p id="res3"></p>
+</div>
+
+<!-- ❓ Q4 -->
+<div id="q4" class="section question">
+  <h2>Will you always be my Queen? 👑</h2>
+  <button onclick="nextQ4('That’s all I ever wanted to hear 💖')">Yes 👑</button>
+  <button onclick="nextQ4('Then I promise to treat you like one… forever 👑')">Forever ❤️</button>
+  <p id="res4"></p>
+</div>
+
+<!-- 💌 FINAL -->
+<div id="final" class="section question">
+  <h2>💌 A Letter For You</h2>
+  <div onclick="openLetter()" style="font-size:60px;cursor:pointer;">💌</div>
+
+  <div id="letter" style="display:none;margin-top:20px;">
+    <p id="l1"></p>
+    <p id="l2"></p>
+    <p id="l3"></p>
+    <p id="eng"></p>
+  </div>
+</div>
+
+<!-- 💙 SIGNATURE -->
+<div class="signature">
+  BAVANA <span class="blue-heart">💙</span> HARI
+</div>
+
+<script>
+
+/* Navigation */
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  setTimeout(()=>document.getElementById(id).classList.add('active'),200);
+}
+
+/* Q1 */
+function checkQ1(){
+  if(document.getElementById("ans1").value=="9/7/2025"){
+    show("q2");
+  } else {
+    document.getElementById("input1").style.display="none";
+    document.getElementById("options1").style.display="block";
+    document.getElementById("res1").innerHTML="Dear, choose the correct date 😏";
+  }
+}
+function optQ1(correct){
+  if(correct) show("q2");
+  else document.getElementById("res1").innerHTML="Try again my Queen 👑";
+}
+
+/* Q2 */
+function nextQ2(msg){
+  document.getElementById("res2").innerHTML=msg;
+  setTimeout(()=>show("q3"),1500);
+}
+
+/* Q3 */
+function checkQ3(){
+  if(document.getElementById("ans3").value=="27072025"){
+    show("q4");
+  } else {
+    document.getElementById("res3").innerHTML="Dear, enter the correct date 💖";
+  }
+}
+
+/* Q4 */
+function nextQ4(msg){
+  document.getElementById("res4").innerHTML=msg;
+  setTimeout(()=>show("final"),1500);
+}
+
+/* Typing Effect */
+function typeText(element, text, speed){
+  let i = 0;
+  function typing(){
+    if(i < text.length){
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+/* Letter (EMOTIONAL + EMOJIS) */
+function openLetter(){
+  document.getElementById("letter").style.display="block";
+
+  typeText(l1, "You are not just important to me… you are my whole world 👑❤️🌍.", 35);
+
+  setTimeout(()=>{
+    typeText(l2, "In a life full of people, it’s you who makes everything feel complete 💖✨🥺. Before you came into my life, everything felt normal… but after you, everything became meaningful 💫💞.", 35);
+  },3000);
+
+  setTimeout(()=>{
+    typeText(l3, "Every smile of yours melts my heart 🥹❤️, and every moment with you becomes a memory I never want to lose 🥺📸💫.", 35);
+  },6000);
+
+  setTimeout(()=>{
+    typeText(eng, "You didn’t just enter my life… you changed it in the most beautiful way possible ❤️‍🔥🌹.<br><br>I promise I will always take care of you 🤝💞, protect you 🛡️❤️, stand by you, and never let anything hurt you 🤍🥺.<br><br>Through every up and down 🎢, I will be your strength 💪❤️, your comfort 🤍💫, and your safe place 🏡💞.<br><br>No matter what happens, I will always choose you… again and again 👑💙💖.", 28);
+  },9000);
+}
+
+/* Hearts */
+for(let i=0;i<30;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(h);
+}
+
+</script>
+
+</body>
+</html>
